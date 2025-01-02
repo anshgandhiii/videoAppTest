@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
@@ -135,7 +136,9 @@ class VideoCallConsumer(AsyncWebsocketConsumer):
         # Determine if this is the initiator (first peer)
         is_initiator = len(VideoCallConsumer.rooms[self.room_id]) == 1
 
+
         logger.info(f"Peer connected to room {self.room_id}. Initiator: {is_initiator}. Total peers: {len(VideoCallConsumer.rooms[self.room_id])}")
+        
 
         # Notify peers when a second peer joins
         if len(VideoCallConsumer.rooms[self.room_id]) == 2:
